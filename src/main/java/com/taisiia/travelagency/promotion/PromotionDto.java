@@ -1,23 +1,21 @@
-package com.taisiia.travelagency.dto;
+package com.taisiia.travelagency.promotion;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.taisiia.travelagency.tour.Tour;
-import com.taisiia.travelagency.user.UserDto;
+import com.taisiia.travelagency.promotion.PromotionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TourOrderDto {
+public class PromotionDto {
     private Long id;
-    private Tour tour;
-    private Set<UserDto> users;
-    private Double totalPrice;
+    private String uuid;
+    private String promotionName;
+    private Double percent;
+    private PromotionStatus status;
 }

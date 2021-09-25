@@ -1,23 +1,21 @@
-package com.taisiia.travelagency.dto;
+package com.taisiia.travelagency.airport;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.taisiia.travelagency.tour.Tour;
-import com.taisiia.travelagency.user.UserDto;
+import com.taisiia.travelagency.address.AddressForm;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import javax.validation.Valid;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TourOrderDto {
+public class AirportForm {
     private Long id;
-    private Tour tour;
-    private Set<UserDto> users;
-    private Double totalPrice;
+    @Valid
+    private AddressForm addressForm;
 }

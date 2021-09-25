@@ -1,5 +1,7 @@
 package com.taisiia.travelagency.dao;
 
+import com.taisiia.travelagency.tour.Tour;
+import com.taisiia.travelagency.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +27,6 @@ public class TourOrder {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "order_user",joinColumns = @JoinColumn(name = "order_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
-    @Column(name = "total_price")
     private Double totalPrice;
 
 }

@@ -1,8 +1,7 @@
-package com.taisiia.travelagency.dto;
+package com.taisiia.travelagency.country;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.taisiia.travelagency.tour.Tour;
-import com.taisiia.travelagency.user.UserDto;
+import com.taisiia.travelagency.continent.ContinentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +14,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TourOrderDto {
+public class CountryDto {
     private Long id;
-    private Tour tour;
-    private Set<UserDto> users;
-    private Double totalPrice;
+    private String countryName;
+    private Set<ContinentDto> continents;
+
 }
