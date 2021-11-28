@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>
+    Your order is:
+</p>
+<h1 th:text="'Name: ' + ${data.userName} + '!'"></h1>
+<h1 th:text="'Surname: ' + ${data.userSurname} + '!'"></h1>
+
+<h2 th:text="'Country' + ${data.countryNameFrom} "></h2>
+<h2 th:text="'City: ' + ${data.cityNameFrom} "></h2>
+
+<h2 th:text="'Country: ' + ${data.countryNameTo} "></h2>
+<h2 th:text="'City: ' + ${data.cityNameTo} "></h2>
+<h2 th:text="'Hotel: ' + ${data.hotelName} "></h2>
+<h2 th:text="'Price without discount: ' + ${data.totalPrice} "></h2>
+
+<h2 th:text="'Discount: ' + ${data.totalDiscount} "></h2>
+
+<h2 th:text="'Total Price: ' + ${data.price} "></h2>
+
+
+</body>
+</html>
