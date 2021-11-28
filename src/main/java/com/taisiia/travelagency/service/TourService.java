@@ -6,7 +6,6 @@ import com.taisiia.travelagency.domain.dao.Hotel;
 import com.taisiia.travelagency.domain.dao.Tour;
 import com.taisiia.travelagency.domain.form.TourSearchForm;
 import com.taisiia.travelagency.enums.DiscountStatus;
-import com.taisiia.travelagency.enums.HotelType;
 import com.taisiia.travelagency.enums.TourStatus;
 import com.taisiia.travelagency.exception.OrderException;
 import com.taisiia.travelagency.exception.TourException;
@@ -17,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -151,64 +148,6 @@ public class TourService {
         }
         return BigDecimal.valueOf(discount.getPercent()).multiply(tourTotalPrice).divide(BigDecimal.valueOf(100));
 
-    }
-
-    List<Tour> findAllByFromAirPortAddressCityCountryCountryName(String countryName) {
-        return tourRepository.findAllByFromAirPortAddressCityCountryCountryName(countryName);
-    }
-
-    List<Tour> findAllByFromAirPortAddressCityCountryContinentsContinentName(String continentName) {
-        return tourRepository.findAllByFromAirPortAddressCityCountryContinentsContinentName(continentName);
-    }
-
-
-    List<Tour> findAllByHotelHotelName(String hotelName) {
-        return tourRepository.findAllByHotelHotelName(hotelName);
-    }
-
-    List<Tour> findAllByHotelHotelType(HotelType hotelType) {
-        return tourRepository.findAllByHotelHotelType(hotelType);
-    }
-
-    List<Tour> findAllByPurposeAirportAddressCityCityName(String cityName) {
-        return tourRepository.findAllByPurposeAirportAddressCityCityName(cityName);
-    }
-
-    List<Tour> findAllByDepartureDateIsBetween(String startDate, String endDate) {
-        LocalDate localDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDateTime startDateFormat = LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), 0, 0, 0);
-        LocalDate localDate1 = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDateTime endDateFormat = LocalDateTime.of(localDate1.getYear(), localDate1.getMonth(), localDate1.getDayOfMonth(), 0, 0, 0);
-        return tourRepository.findAllByDepartureDateIsBetween(startDateFormat, endDateFormat);
-    }
-
-
-    List<Tour> findAllByDepartureDateAfterOrderByPurposeAirportAddressCityCityName(String date) {
-        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDateTime departure = LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), 0, 0, 0);
-        return tourRepository.findAllByDepartureDateAfterOrderByPurposeAirportAddressCityCityName(departure);
-    }
-
-    List<Tour> findAllByPlacesAdultsBetweenOrPlacesChildBetween(Integer placesAdults, Integer placesAdults2, Integer placesChild, Integer placesChild2) {
-        return tourRepository.findAllByPlacesAdultsBetweenOrPlacesChildBetween(placesAdults, placesAdults2, placesChild, placesChild2);
-    }
-
-    List<Tour> findByDepartureDateAfter(String date) {
-        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocalDateTime departure = LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), 0, 0, 0);
-        return tourRepository.findByDepartureDateAfter(departure);
-    }
-
-    public List<Tour> findByCityPurpose(String cityName) {
-        return tourRepository.findAllByPurposeAirportAddressCityCityName(cityName);
-    }
-
-    public List<Tour> findByContinentPurpose(String continentName) {
-        return tourRepository.findAllByPurposeAirportAddressCityCountryContinentsContinentName(continentName);
-    }
-
-    public List<Tour> findByCountryPurpose(String countryName) {
-        return tourRepository.findAllByFromAirPortAddressCityCountryCountryName(countryName);
     }
 
 

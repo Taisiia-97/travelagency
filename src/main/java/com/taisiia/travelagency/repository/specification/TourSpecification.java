@@ -32,7 +32,29 @@ public class TourSpecification {
             if (request.getHotelType() != null && !request.getHotelType().isBlank()) {
                 predicates.add(criteriaBuilder.equal(root.get("hotel").get("hotelType"), HotelType.safeValueOf(request.getHotelType()).toString()));
             }
+            if (request.getMaxPrice() != null && request.getMinPrice() != null) {
+                predicates.add(criteriaBuilder.between(root.get("adultRegularPrice"), request.getMaxPrice(), request.getMinPrice()));
+            }
+            if (request.getMaxPrice() == null || request.getMinPrice() == null) {
+                if (request.getMinPrice() != null) {
+                    predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("adultRegularPrice"), request.getMinPrice()));
+                }
+                if (request.getMaxPrice() != null) {
+                    predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("adultRegularPrice"), request.getMaxPrice()));
+                }
+            }
 
+            if (request.getDepartureDate() != null && request.getReturnDate() != null) {
+                predicates.add(criteriaBuilder.between(root.get("departureDate"), request.getDepartureDate(), request.getReturnDate()));
+            }
+            if (request.getDepartureDate() == null || request.getReturnDate() == null) {
+                if (request.getDepartureDate() != null) {
+                    predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("departureDate"), request.getDepartureDate()));
+                }
+                if (request.getReturnDate() != null) {
+                    predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("returnDate"), request.getReturnDate()));
+                }
+            }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 
         });

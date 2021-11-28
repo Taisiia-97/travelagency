@@ -23,8 +23,8 @@ public class TourSearchForm {
     private LocalDateTime returnDate;
     private String hotelType;
     private String hotelStandard;
-    private String minPrice;
-    private String maxPrice;
+    private Double minPrice;
+    private Double maxPrice;
 
 
 }

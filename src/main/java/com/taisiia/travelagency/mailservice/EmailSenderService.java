@@ -88,10 +88,15 @@ public class EmailSenderService {
         }
     }
 
-    public void sendBirthDayDiscount(User user, Discount discount) {
+    public void sendBirthDayDiscount(User user, String discount) {
         MimeMessage message = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom("shoptaisiia@gmail.com");
+            helper.setTo(user.getEmail());
+            helper.setSubject("Discount");
+            helper.setText(mailContentBuilder.generateContent(Map.ofEntries(Map.entry("name", user.getFirstName()),Map.entry("discount",discount)), "birthday_bon"), true);
+            javaMailSender.send(message);
 
         } catch (MessagingException e) {
             log.error(e.getMessage());

@@ -51,7 +51,7 @@ public class DiscountController {
         return discountService.getPage(PageRequest.of(page, size)).map(discountMapper::toDto);
     }
 
-    @GetMapping("/promotion/{status}")
+    @GetMapping("/discount/{status}")
     public List<DiscountDto> getPromotionsByStatus(@PathVariable String status) {
         return discountMapper.toListDto(discountService.findByPromotionStatus(status));
     }

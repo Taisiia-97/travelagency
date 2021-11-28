@@ -19,7 +19,6 @@ public class Template {
     private Long id;
     private String name;
     private String subject;
-    //pozwala na przechowywania więcej niż 255 znaków
     @Lob
     private String body;
 }

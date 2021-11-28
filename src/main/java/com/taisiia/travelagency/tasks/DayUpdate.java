@@ -22,7 +22,7 @@ public class DayUpdate {
     private final DiscountService discountService;
     private final ConfirmationTokenService confirmationTokenService;
     private final PasswordTokenService passwordTokenService;
-    private EmailSenderService emailSenderService;
+    private final EmailSenderService emailSenderService;
 
     @Scheduled(cron = "0 0 10 1/1 * ?")
     public void dayUpdate() {
@@ -68,20 +68,20 @@ public class DayUpdate {
     }
 
 
-    //task do stworzenia bonu urodzimowego
     @Scheduled(cron = "0 0 10 1/1 * ?")
     public void createBirthDayDiscountForUser() {
         userService.loadUsers().stream().filter(user -> user.getBirthDay().getDayOfMonth() == LocalDate.now().getDayOfMonth()
                         && user.getBirthDay().getMonth().equals(LocalDate.now().getMonth()))
                 .forEach(user -> {
                     Discount discount = discountService.save(Discount.builder()
-                            .code(user.getEmail() + UUID.randomUUID().toString() + LocalDate.now().toString())
+                            .code(user.getEmail() + UUID.randomUUID() + LocalDate.now())
                             .endDate(LocalDateTime.now().plusWeeks(1))
-                            .name("BirthdayCode" + user.getEmail() + LocalDate.now().toString())
+                            .name("BirthdayCode" + user.getEmail() + LocalDate.now())
                             .percent(20.0)
                             .build(), "active");
-                    emailSenderService.sendBirthDayDiscount(user, discount);
+                    emailSenderService.sendBirthDayDiscount(user, discount.getCode());
                 });
+        log.info("Discount bons were sent to users");
     }
 
 }
